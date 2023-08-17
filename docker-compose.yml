@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    environment:
+      MSSQL_SA_PASSWORD: "Secret1234"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    expose:
+      - "1433"
+    volumes:
+      - ./logs:/var/log/mssql/log/
+      - ./data:/var/lib/mssql/data/
+      - ./configs/mssql.conf:/var/lib/mssql/mssql.conf
+    networks:
+      - default
+
+networks:
+  default:
+    name: mssql
