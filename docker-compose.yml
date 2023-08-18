@@ -12,9 +12,9 @@ services:
     expose:
       - "1433"
     volumes:
-      - ./logs:/var/log/mssql/log/
-      - ./data:/var/lib/mssql/data/
-      - ./configs/mssql.conf:/var/lib/mssql/mssql.conf
+      - ./logs:/var/opt/mssql/log/
+      - ./data:/var/opt/mssql/data/
+      - ./configs/mssql.conf:/var/opt/mssql/mssql.conf
     networks:
       - default
 
