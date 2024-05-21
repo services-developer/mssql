@@ -2,11 +2,16 @@ version: "3.9"
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     container_name: mssql
     environment:
       MSSQL_SA_PASSWORD: "Secret1234"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Express"
+
+      MSSQL_LOG_DIR: "/var/opt/mssql/log"
+      MSSQL_DATA_DIR: "/var/opt/mssql/data"
+      MSSQL_BACKUP_DIR: "/var/opt/mssql/backup"
     ports:
       - "1433:1433"
     expose:
@@ -14,7 +19,8 @@ services:
     volumes:
       - ./logs:/var/opt/mssql/log/
       - ./data:/var/opt/mssql/data/
-      - ./configs/mssql.conf:/var/opt/mssql/mssql.conf
+      - ./backup:/var/opt/mssql/backup/
+#      - ./configs/mssql.conf:/var/opt/mssql/mssql.conf
     networks:
       - default
 
